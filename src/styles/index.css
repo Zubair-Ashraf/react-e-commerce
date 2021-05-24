@@ -1,1 +1,5 @@
 @import './theme.min.css';
+
+main {
+  min-height: 95vh;
+}

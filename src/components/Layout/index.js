@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Header, Footer } from './components';
 
 export const Layout = ({ children }) => {
   return (
-    <main>
+    <Fragment>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
-    </main>
+    </Fragment>
   );
 };
