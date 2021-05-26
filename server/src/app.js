@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-// import connections from './connections';
+import connections from './connections';
 import routes from './api';
 
-// connections();
+connections();
 
 const app = express();
 
