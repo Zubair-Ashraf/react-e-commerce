@@ -1,5 +1,5 @@
 {
-  "name": "react-e-commerce-client",
+  "name": "react-e-commerce-server",
   "version": "0.0.1",
   "main": "src/index.js"
 }
