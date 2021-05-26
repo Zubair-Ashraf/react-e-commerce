@@ -10,7 +10,10 @@ export const useQuery = (
 
   const [data, setData] = useState(null);
 
-  useEffect(() => onRequest(), []);
+  useEffect(() => {
+    (async () => onRequest())();
+    return () => {};
+  }, []);
 
   const onRequest = async () => {
     setLoading(true);

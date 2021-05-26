@@ -9,7 +9,7 @@ export const ManageProduct = () => {
   const { id: productId } = useParams();
 
   const { isLoading, data } = useQuery(Api.products.one, {
-    queryParam: productId,
+    queryParam: { productId },
   });
 
   if (isLoading) return <span>Loading...</span>;
