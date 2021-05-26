@@ -2,12 +2,17 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Image, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import { RatingBadge } from 'components';
-import products from 'constants/products';
+import { useQuery } from 'hooks';
+import { Api } from 'services';
 
 export const ManageProduct = () => {
   const { id: productId } = useParams();
 
-  const product = products.find(({ _id }) => _id === productId);
+  const { isLoading, data } = useQuery(Api.products.one, {
+    queryParam: productId,
+  });
+
+  if (isLoading) return <span>Loading...</span>;
 
   const {
     name,
@@ -18,7 +23,7 @@ export const ManageProduct = () => {
     brand,
     category,
     countInStock,
-  } = product;
+  } = data;
 
   return (
     <Container>
