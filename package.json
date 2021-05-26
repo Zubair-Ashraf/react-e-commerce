@@ -6,7 +6,7 @@
   "scripts": {
     "start:server": "cd server && env-cmd -f ./config/dev.env nodemon src/index.js --ext js,env --exec babel-node",
     "start:client": "cd client && react-scripts start",
-    "start": "concurrently \"npm run start:server\" \"npm run start:server\""
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
   "repository": {
     "type": "git",
