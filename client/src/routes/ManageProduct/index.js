@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Image, Row, Col, Button, ListGroup } from 'react-bootstrap';
-import { RatingBadge } from 'components';
+import { RatingBadge, LoaderSection } from 'components';
 import { useQuery } from 'hooks';
 import { Api } from 'services';
 
@@ -12,7 +12,7 @@ export const ManageProduct = () => {
     queryParam: { productId },
   });
 
-  if (isLoading) return <span>Loading...</span>;
+  if (isLoading) return <LoaderSection />;
 
   const {
     name,
