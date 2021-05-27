@@ -1,5 +1,5 @@
 import http from 'axios';
-// import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import { toast as showToast } from 'react-toastify';
 
 const axios = http.create({
@@ -35,9 +35,9 @@ const responseError = (error) => {
     return Promise.reject(error);
   }
 
-  // if (!isEmpty(error.response.data.errors))
-  //   return Promise.reject(error.response.data.errors[0].msg);
-  // else return Promise.reject(error.response.data.error);
+  if (!isEmpty(error.response && error.response.data.message))
+    return Promise.reject(error.response.data.message);
+  else return Promise.reject(error.message);
 };
 
 //Get authorization token

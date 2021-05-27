@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ProductCard } from './components';
-import { useQuery } from 'hooks';
-import { Api } from 'services';
+import { products } from 'actions';
 
 export const ManageHome = () => {
-  const { isLoading, data } = useQuery(Api.products.list);
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(products.list()), []);
+
+  const productList = useSelector((state) => state.productList);
+
+  const { isLoading, error, products: data } = productList;
 
   if (isLoading) return <span>Loading...</span>;
+
+  if (error) return <span>Error: {error}</span>;
 
   return (
     <Container>

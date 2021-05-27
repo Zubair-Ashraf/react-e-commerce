@@ -3,17 +3,18 @@ import {
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_FAIL,
 } from 'constants/types';
-import { useQuery } from 'hooks';
 import { Api } from 'services';
 
 const list = () => async (dispatch) => {
-  const { isLoading, data, error } = useQuery(Api.products.list);
+  try {
+    dispatch({ type: PRODUCT_LIST_REQUEST });
 
-  if (isLoading) dispatch({ type: PRODUCT_LIST_REQUEST });
+    const { data } = await Api.products.list();
 
-  if (data) dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-
-  if (error) dispatch({ type: PRODUCT_LIST_FAIL, payload: error });
+    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: PRODUCT_LIST_FAIL, payload: error });
+  }
 };
 
 export const products = { list };
