@@ -5,6 +5,7 @@ import Routes from 'core/Routes';
 import { Layout } from 'components';
 import { useScroll } from 'hooks';
 import store from 'store';
+//styles
 import 'styles/index.css';
 
 const App = () => {
