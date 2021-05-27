@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from '../Routes';
+import { Provider } from 'react-redux';
+import Routes from 'core/Routes';
 import { Layout } from 'components';
 import { useScroll } from 'hooks';
+import store from 'store';
 import 'styles/index.css';
 
 const App = () => {
@@ -11,9 +13,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Layout>
-        <Routes />
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <Routes />
+        </Layout>
+      </Provider>
     </BrowserRouter>
   );
 };
