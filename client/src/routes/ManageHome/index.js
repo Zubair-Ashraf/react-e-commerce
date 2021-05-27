@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
+import { LoaderSection } from 'components';
 import { ProductCard } from './components';
 import { products } from 'actions';
 
 export const ManageHome = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(products.list()), []);
+  useEffect(() => {
+    dispatch(products.list());
+
+    return () => {};
+  }, []);
 
   const productList = useSelector((state) => state.productList);
 
-  const { isLoading, error, products: data } = productList;
+  const { isLoading, products: data } = productList;
 
-  if (isLoading) return <span>Loading...</span>;
-
-  if (error) return <span>Error: {error}</span>;
+  if (isLoading) return <LoaderSection />;
 
   return (
     <Container>
