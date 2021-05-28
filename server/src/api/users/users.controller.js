@@ -23,3 +23,11 @@ export const login = async (req, res) => {
     throw new Error('Invalid email or password');
   }
 };
+
+export const getProfile = async (req, res) => {
+  const { id } = req.body.user;
+
+  const user = await User.findById(id).select('-password');
+
+  res.status(200).send(user);
+};
