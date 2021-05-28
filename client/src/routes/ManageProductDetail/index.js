@@ -15,7 +15,7 @@ import { RatingBadge, LoaderSection } from 'components';
 import { products } from 'actions';
 
 export const ManageProductDetail = () => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const { id: productId } = useParams();
 

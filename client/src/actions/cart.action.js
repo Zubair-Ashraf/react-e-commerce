@@ -6,7 +6,10 @@ export const addToCart = (id, quantity) => async (dispatch, getState) => {
   try {
     const { data } = await Api.products.one(null, { productId: id });
 
-    dispatch({ type: CART_ADD_ITEM, payload: { ...data, quantity } });
+    dispatch({
+      type: CART_ADD_ITEM,
+      payload: { ...data, quantity: parseInt(quantity) },
+    });
 
     localStorage.setItem(
       'cartItems',
