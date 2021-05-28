@@ -34,7 +34,7 @@ export const ManageCart = () => {
 
   const handleRemoveFromCart = (id) => dispatch(removeFromCart(id));
 
-  if (isEmpty(cartItems)) return <NotFoundSection />;
+  if (isEmpty(cartItems)) return <EmptyCartSection />;
 
   return (
     <Container>
@@ -135,7 +135,7 @@ export const ManageCart = () => {
   );
 };
 
-const NotFoundSection = () => {
+const EmptyCartSection = () => {
   return (
     <Container>
       <div className='text-center py-5'>
