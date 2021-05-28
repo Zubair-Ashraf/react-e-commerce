@@ -1,4 +1,5 @@
 import { User } from './users.model';
+import generateToken from '../../utils/generateToken';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -12,7 +13,7 @@ export const login = async (req, res) => {
     name: user.name,
     email: user.email,
     isAdmin: user.isAdmin,
-    token: null,
+    token: generateToken(user._id),
   };
 
   if (user && isPasswordMatched) return res.status(200).json(user);
