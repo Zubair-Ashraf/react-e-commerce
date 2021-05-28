@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { isEmpty } from 'lodash';
 import {
   Container,
   Row,
   Col,
   Table,
   Image,
-  Badge,
   ListGroup,
   Button,
 } from 'react-bootstrap';
-import { addToCart } from 'actions';
+import { addToCart, removeFromCart } from 'actions';
 
 export const ManageCart = () => {
   const { search } = useLocation();
@@ -31,6 +31,10 @@ export const ManageCart = () => {
   const cart = useSelector((state) => state.cart);
 
   const { cartItems } = cart;
+
+  const handleRemoveFromCart = (id) => dispatch(removeFromCart(id));
+
+  if (isEmpty(cartItems)) return <NotFoundSection />;
 
   return (
     <Container>
@@ -55,10 +59,11 @@ export const ManageCart = () => {
                 <td className='text-center border-0'>
                   <small>Total</small>
                 </td>
+                <td className='text-center border-0'>&nbsp;</td>
               </tr>
             </thead>
             <tbody>
-              {cartItems.map(({ name, brand, image, price, quantity }) => (
+              {cartItems.map(({ _id, name, brand, image, price, quantity }) => (
                 <tr>
                   <td className='d-flex align-items-center py-3'>
                     <Image src={image} fluid rounded width={60} height={60} />
@@ -78,6 +83,12 @@ export const ManageCart = () => {
                   </td>
                   <td className='text-center py-4'>
                     <b>{parseFloat(quantity * price).toFixed(2)}</b>
+                  </td>
+                  <td>
+                    <i
+                      className='fa fa-times text-center py-4 button-icon text-danger'
+                      onClick={() => handleRemoveFromCart(_id)}
+                    />
                   </td>
                 </tr>
               ))}
@@ -120,6 +131,27 @@ export const ManageCart = () => {
           </Button>
         </Col>
       </Row>
+    </Container>
+  );
+};
+
+const NotFoundSection = () => {
+  return (
+    <Container>
+      <div className='text-center py-5'>
+        <Image
+          src='/images/empty_cart.svg'
+          width={180}
+          alt='empty-cart'
+          className='mb-4'
+        />
+        <h6>You haven't added anything to your cart!</h6>
+        <Link to='/'>
+          <Button size='sm' className='px-3'>
+            Browse now
+          </Button>
+        </Link>
+      </div>
     </Container>
   );
 };

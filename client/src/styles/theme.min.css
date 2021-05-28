@@ -298,6 +298,14 @@ label {
 button {
   border-radius: 0;
 }
+.button-icon {
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+}
+.button-icon:hover {
+  cursor: pointer;
+}
 button:focus:not(:focus-visible) {
   outline: 0;
 }

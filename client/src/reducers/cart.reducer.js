@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM } from 'constants/types';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from 'constants/types';
 
 let cartItems = localStorage.getItem('cartItems');
 
@@ -21,6 +21,12 @@ export const cartReducer = (state = { cartItems }, action) => {
       return {
         ...state,
         cartItems,
+      };
+
+    case CART_REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(({ _id }) => _id !== action.payload),
       };
 
     default:
