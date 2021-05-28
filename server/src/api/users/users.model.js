@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema(
   {
@@ -26,5 +27,9 @@ const UserSchema = new mongoose.Schema(
     versionKey: false,
   }
 );
+
+UserSchema.methods.isPasswordMatched = function (requestPassword) {
+  return bcrypt.compare(requestPassword, this.password);
+};
 
 export const User = mongoose.model('User', UserSchema);
