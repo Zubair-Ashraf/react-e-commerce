@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Container, Image, Row, Col, Button, ListGroup } from 'react-bootstrap';
 import { RatingBadge, LoaderSection } from 'components';
-import { useQuery } from 'hooks';
-import { Api } from 'services';
+import { products } from 'actions';
 
 export const ManageProduct = () => {
   const { id: productId } = useParams();
 
-  const { isLoading, data } = useQuery(Api.products.one, {
-    queryParam: { productId },
-  });
+  const dispatch = useDispatch();
 
-  if (isLoading) return <LoaderSection />;
+  useEffect(() => {
+    dispatch(products.one(productId));
+
+    return () => {};
+  }, []);
+
+  const productDetails = useSelector((state) => state.productDetails);
+
+  const { isLoading, product } = productDetails;
 
   const {
     name,
@@ -23,7 +29,9 @@ export const ManageProduct = () => {
     brand,
     category,
     countInStock,
-  } = data;
+  } = product;
+
+  if (isLoading) return <LoaderSection />;
 
   return (
     <Container>
