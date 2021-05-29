@@ -32,4 +32,12 @@ UserSchema.methods.isPasswordMatched = function (requestPassword) {
   return bcrypt.compare(requestPassword, this.password);
 };
 
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) next();
+
+  const salt = await bcrypt.genSalt(10);
+
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
 export const User = mongoose.model('User', UserSchema);
