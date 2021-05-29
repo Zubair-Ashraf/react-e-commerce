@@ -13,8 +13,7 @@ export const login = async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
-    isAdmin: user.isAdmin,
-    token: generateToken(user._id),
+    token: generateToken({ id: user._id, isAdmin: user.isAdmin }),
   };
 
   if (user && isPasswordMatched) return res.status(200).json(user);
@@ -49,8 +48,7 @@ export const register = async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
-    isAdmin: user.isAdmin,
-    token: generateToken(user._id),
+    token: generateToken({ id: user._id, isAdmin: user.isAdmin }),
   };
 
   res.status(200).json(user);
