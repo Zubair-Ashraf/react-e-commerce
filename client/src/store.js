@@ -5,12 +5,14 @@ import {
   productListReducer,
   productDetailReducer,
   cartReducer,
+  userReducer,
 } from 'reducers';
 
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailReducer,
   cart: cartReducer,
+  user: userReducer,
 });
 
 const initialState = {};

@@ -18,7 +18,7 @@ export const Header = () => {
                 Cart
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/login'>
+            <LinkContainer to='/auth/login'>
               <Nav.Link>
                 <i className='fas fa-user fa-sm me-2' />
                 Sign In

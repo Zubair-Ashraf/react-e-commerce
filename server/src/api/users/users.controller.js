@@ -7,6 +7,12 @@ export const login = async (req, res) => {
 
   let user = await User.findOne({ email });
 
+  if (!user) {
+    res.status(401);
+
+    throw new Error('Invalid email or password');
+  }
+
   const isPasswordMatched = await user.isPasswordMatched(password);
 
   user = {
