@@ -25,3 +25,9 @@ export const login = (email, password) => async (dispatch) => {
     showToast.error(error || 'Something went wrong');
   }
 };
+
+export const logout = () => async (dispatch) => {
+  dispatch({ type: USER_LOGOUT });
+
+  localStorage.removeItem('userInfo');
+};

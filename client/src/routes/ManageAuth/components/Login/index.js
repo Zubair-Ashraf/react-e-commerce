@@ -14,7 +14,7 @@ export const Login = () => {
 
   const { push } = useHistory();
 
-  const { userInfo } = useSelector((state) => state.user);
+  const { userInfo, isLoading } = useSelector((state) => state.user);
 
   const handleEmailChange = ({ target: { value } }) => setEmail(value);
 
@@ -62,8 +62,13 @@ export const Login = () => {
                 <span>Don't have an account? &nbsp;</span>
                 <Link to='/auth/register'>Register</Link>
               </span>
-              <Button variant='secondary' type='submit' className='px-4'>
-                Sign In
+              <Button
+                variant='secondary'
+                type='submit'
+                disabled={isLoading}
+                className='px-4'
+              >
+                {isLoading ? 'Loading...' : 'Sign In'}
               </Button>
             </div>
           </Form>
