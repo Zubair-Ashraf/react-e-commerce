@@ -7,7 +7,7 @@ export const authGuard = (req, res, next) => {
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-    const userId = decodedToken.userId;
+    const userId = decodedToken.id;
 
     if (!userId) {
       res.status(401);
