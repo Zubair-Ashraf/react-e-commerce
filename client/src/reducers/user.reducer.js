@@ -3,6 +3,9 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  USER_REGISTER_REQUEST,
+  USER_REGISTER_SUCCESS,
+  USER_REGISTER_FAIL,
 } from 'constants/types';
 
 let userInfo = localStorage.getItem('userInfo');
@@ -12,12 +15,15 @@ userInfo = userInfo ? JSON.parse(userInfo) : {};
 export const userReducer = (state = { userInfo }, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
+    case USER_REGISTER_REQUEST:
       return { isLoading: true };
 
     case USER_LOGIN_SUCCESS:
+    case USER_REGISTER_SUCCESS:
       return { isLoading: false, userInfo: action.payload };
 
     case USER_LOGIN_FAIL:
+    case USER_REGISTER_FAIL:
       return { isLoading: false, error: action.payload };
 
     case USER_LOGOUT:
