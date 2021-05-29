@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { login } from 'actions';
@@ -11,6 +12,10 @@ export const Login = () => {
 
   const dispatch = useDispatch();
 
+  const { push } = useHistory();
+
+  const { userInfo } = useSelector((state) => state.user);
+
   const handleEmailChange = ({ target: { value } }) => setEmail(value);
 
   const handlePasswordChange = ({ target: { value } }) => setPassword(value);
@@ -20,6 +25,8 @@ export const Login = () => {
 
     dispatch(login(email, password));
   };
+
+  if (!isEmpty(userInfo)) push(`/`);
 
   return (
     <Container>

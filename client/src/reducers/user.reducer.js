@@ -5,7 +5,11 @@ import {
   USER_LOGOUT,
 } from 'constants/types';
 
-export const userReducer = (state = { userInfo: {} }, action) => {
+let userInfo = localStorage.getItem('userInfo');
+
+userInfo = userInfo ? JSON.parse(userInfo) : {};
+
+export const userReducer = (state = { userInfo }, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
       return { isLoading: true };
