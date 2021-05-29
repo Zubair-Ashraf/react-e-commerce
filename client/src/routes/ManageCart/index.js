@@ -11,6 +11,7 @@ import {
   ListGroup,
   Button,
 } from 'react-bootstrap';
+import { LoaderSection } from 'components';
 import { addToCart, removeFromCart } from 'actions';
 
 export const ManageCart = () => {
@@ -28,13 +29,19 @@ export const ManageCart = () => {
     return () => {};
   }, []);
 
-  const cart = useSelector((state) => state.cart);
+  const state = useSelector((state) => state);
+
+  const { cart, productDetails } = state;
 
   const { cartItems } = cart;
+
+  const { isLoading } = productDetails;
 
   const handleRemoveFromCart = (id) => dispatch(removeFromCart(id));
 
   if (isEmpty(cartItems)) return <EmptyCartSection />;
+
+  if (isLoading) return <LoaderSection />;
 
   return (
     <Container>
