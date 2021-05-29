@@ -1,4 +1,5 @@
 import React from 'react';
+import { isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
@@ -9,7 +10,7 @@ export const Header = () => {
 
   const { userInfo } = useSelector((state) => state.user);
 
-  const isLoggedIn = userInfo;
+  const isLoggedIn = !isEmpty(userInfo);
 
   const handleLogout = () => dispatch(logout());
 
@@ -30,8 +31,11 @@ export const Header = () => {
             </LinkContainer>
             {isLoggedIn ? (
               <NavDropdown title={userInfo.name} id='username' drop='left'>
-                <LinkContainer to='/profile'>
+                <LinkContainer to='/auth/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/auth/change-password'>
+                  <NavDropdown.Item>Change Password</NavDropdown.Item>
                 </LinkContainer>
                 <NavDropdown.Item onClick={handleLogout}>
                   Logout

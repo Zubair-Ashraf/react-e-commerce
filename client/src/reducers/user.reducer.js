@@ -6,6 +6,9 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_CHANGE_PASSWORD_REQUEST,
+  USER_CHANGE_PASSWORD_SUCCESS,
+  USER_CHANGE_PASSWORD_FAIL,
 } from 'constants/types';
 
 let userInfo = localStorage.getItem('userInfo');
@@ -31,5 +34,21 @@ export const userReducer = (state = { userInfo }, action) => {
 
     default:
       return state;
+  }
+};
+
+export const changePasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_CHANGE_PASSWORD_REQUEST:
+      return { isLoading: true };
+
+    case USER_CHANGE_PASSWORD_SUCCESS:
+      return { isLoading: false, isSuccess: true };
+
+    case USER_CHANGE_PASSWORD_FAIL:
+      return { isLoading: false, error: action.payload };
+
+    default:
+      return { ...state };
   }
 };

@@ -6,6 +6,7 @@ import {
   productDetailReducer,
   cartReducer,
   userReducer,
+  changePasswordReducer,
 } from 'reducers';
 
 const reducer = combineReducers({
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   productDetails: productDetailReducer,
   cart: cartReducer,
   user: userReducer,
+  userChangePassword: changePasswordReducer,
 });
 
 const initialState = {};

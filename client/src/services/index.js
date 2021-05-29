@@ -9,6 +9,9 @@ const Api = {
   user: {
     login: UserService.login,
     register: UserService.register,
+    profile: UserService.getProfile,
+    updateProfile: UserService.updateProfile,
+    changePassword: UserService.changePassword,
   },
 };
 

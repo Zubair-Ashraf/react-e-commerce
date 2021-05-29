@@ -18,7 +18,7 @@ axios.interceptors.response.use(
 //Request Handler
 const requestHandler = (request) => {
   if (isHandlerEnabled(request)) {
-    request.headers['token'] = getToken();
+    request.headers['authorization'] = getToken();
   }
   return request;
 };
@@ -42,7 +42,11 @@ const responseError = (error) => {
 
 //Get authorization token
 const getToken = () => {
-  return localStorage.getItem('x-token');
+  let userInfo = localStorage.getItem('userInfo');
+
+  userInfo = userInfo ? JSON.parse(userInfo) : {};
+
+  return userInfo.token;
 };
 
 //Check handler enable or not
